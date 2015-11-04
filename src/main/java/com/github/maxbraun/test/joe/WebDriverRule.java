@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.util.List;
 import java.util.Set;
@@ -37,7 +39,11 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
     }
 
     private void startWebDriver() {
-        driver.set(LocalDriverFactory.createDriver(description.getTestClass().getAnnotation(WithBrowser.class)));
+        WebDriver driver = LocalDriverFactory.createDriver(description.getTestClass().getAnnotation(WithBrowser.class));
+        WebDriverEventListener loggingListener = new ScreenshottingWebDriverEventListener(description);
+        EventFiringWebDriver driverWithReporting = new EventFiringWebDriver(driver);
+        driverWithReporting.register(loggingListener);
+        WebDriverRule.driver.set(driverWithReporting);
     }
 
     private WebDriver webDriver() {
