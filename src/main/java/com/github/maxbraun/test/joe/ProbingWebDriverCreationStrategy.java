@@ -9,9 +9,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.Optional;
 
-/**
- * Created by max on 04/11/15.
- */
+
 public class ProbingWebDriverCreationStrategy implements WebDriverCreationStrategy {
     @Override
     public Optional<? extends WebDriver> createWebDriver() {

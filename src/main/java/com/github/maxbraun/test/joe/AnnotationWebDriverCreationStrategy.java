@@ -1,13 +1,11 @@
 package com.github.maxbraun.test.joe;
 
+import com.thoughtworks.selenium.SeleniumException;
 import org.openqa.selenium.WebDriver;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
-/**
- * Created by max on 04/11/15.
- */
+
 public class AnnotationWebDriverCreationStrategy implements WebDriverCreationStrategy {
     private final WithBrowser annotation;
 
@@ -17,14 +15,13 @@ public class AnnotationWebDriverCreationStrategy implements WebDriverCreationStr
 
     @Override
     public Optional<? extends WebDriver> createWebDriver() {
-        if (annotation == null) {
+        if (null == annotation || null == annotation.value() || null == annotation.value().getClazz()) {
             return Optional.empty();
         }
         try {
-            annotation.value().getClazz().newInstance();
+            return Optional.of(annotation.value().getClazz().newInstance());
         } catch (Exception e) {
-            System.out.println(annotation.value() + " could not be initialised. " + e.getMessage());
+            throw new SeleniumException(e);
         }
-        return Optional.empty();
     }
 }
