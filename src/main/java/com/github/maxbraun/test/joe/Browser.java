@@ -11,6 +11,7 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public enum Browser {
+    ANY(null),
     FIREFOX(FirefoxDriver.class),
     GOOGLECHROME(ChromeDriver.class),
     SAFARI(SafariDriver.class),
