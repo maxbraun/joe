@@ -18,6 +18,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <scm>
+        <connection>scm:git:git://github.com/maxbraun/joe.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/maxbraun/joe.git</developerConnection>
+        <url>https://github.com/maxbraun/joe/</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
