@@ -1,69 +1,54 @@
 package com.github.maxbraun.test.joe;
 
-import net.oneandone.sushi.fs.Node;
 import net.oneandone.sushi.fs.World;
-import net.oneandone.sushi.fs.file.FileNode;
 import org.junit.runner.Description;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.IOException;
-
 public class ScreenshottingWebDriverEventListener extends AbstractWebDriverEventListener {
-    private static final World world = new World();
     private final Description description;
-    private final FileNode reportDir = world.guessProjectHome(this.getClass()).join("target", "test-screenshots");
+    private final ScreenshotDirectory screenshotDirectory;
 
     public ScreenshottingWebDriverEventListener(Description description) {
         this.description = description;
+        this.screenshotDirectory = new ScreenshotDirectory(description.getTestClass(), new World());
     }
 
     @Override
     public void afterNavigateTo(String url, WebDriver driver) {
         super.afterNavigateTo(url, driver);
-        logAndTakeSnapShot(driver);
+        logAndTakeSnapShot(driver, "afterNavigate");
     }
 
     @Override
-    public void onException(Throwable throwable, WebDriver driver) {
-        super.onException(throwable, driver);
-        logAndTakeSnapShot(driver);
+    public void beforeClickOn(WebElement element, WebDriver driver) {
+        super.beforeClickOn(element, driver);
+        logAndTakeSnapShot(driver, "beforeClick");
     }
 
-    protected void logAndTakeSnapShot(WebDriver driver) {
+    @Override
+    public void afterClickOn(WebElement element, WebDriver driver) {
+        super.afterClickOn(element, driver);
+        logAndTakeSnapShot(driver, "afterClick");
+    }
+
+    protected void logAndTakeSnapShot(WebDriver driver, String action) {
         if (driver instanceof EventFiringWebDriver) {
             EventFiringWebDriver eventFiringWebDriver = (EventFiringWebDriver) driver;
             driver = eventFiringWebDriver.getWrappedDriver();
         }
-        takeScreenshot(driver);
+        takeScreenshot(driver, action);
     }
 
-    private void takeScreenshot(WebDriver webDriver) {
+    private void takeScreenshot(WebDriver webDriver, String action) {
         if (webDriver instanceof TakesScreenshot) {
             TakesScreenshot takesScreenshotWebDriver = (TakesScreenshot) webDriver;
             byte[] screenshot = takesScreenshotWebDriver.getScreenshotAs(OutputType.BYTES);
-            try {
-                Node file = testClassDirectory().join(System.currentTimeMillis() + ".png");
-                file.writeBytes(screenshot);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            screenshotDirectory.save(screenshot, action, description.getMethodName());
         }
     }
-
-
-    private Node testMethodsDirectory() throws IOException {
-        return testClassDirectory().join(description.getMethodName()).mkdirsOpt();
-
-    }
-
-    private Node testClassDirectory() throws IOException {
-        return reportDir.join(description.getTestClass().getSimpleName()).mkdirsOpt();
-    }
-
-
 }
