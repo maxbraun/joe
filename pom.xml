@@ -18,6 +18,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <oneandone.java.source>1.8</oneandone.java.source>
         <oneandone.java.target>1.8</oneandone.java.target>
+        <jacoco.check.classRatio>0.50</jacoco.check.classRatio>
+        <jacoco.check.instructionRatio>0.50</jacoco.check.instructionRatio>
+        <jacoco.check.methodRatio>0.50</jacoco.check.methodRatio>
+        <jacoco.check.branchRatio>0.50</jacoco.check.branchRatio>
+        <jacoco.check.complexityRatio>0.50</jacoco.check.complexityRatio>
+        <jacoco.check.lineRatio>0.50</jacoco.check.lineRatio>
     </properties>
 
     <scm>
@@ -93,7 +99,6 @@
                 <configuration>
                     <failOnViolation>false</failOnViolation>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
