@@ -100,6 +100,14 @@
                     <failOnViolation>false</failOnViolation>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <strictCheck>false</strictCheck>
+                    <failIfMissing>false</failIfMissing>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
