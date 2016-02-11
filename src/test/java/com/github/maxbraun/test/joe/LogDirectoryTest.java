@@ -6,12 +6,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ScreenshotDirectoryTest {
+public class LogDirectoryTest {
 
     @Test
     public void testDirectoryNaming() throws Exception {
-        ScreenshotDirectory screenshotDirectory = new ScreenshotDirectory(this.getClass(), new World());
-        Node node = screenshotDirectory.methodDirectory("method[foo|bar]");
+        LogDirectory logDirectory = new LogDirectory(this.getClass(), new World());
+        Node node = logDirectory.methodDirectory("method[foo|bar]");
         assertEquals("bar", node.getName());
         assertEquals("foo", node.getParent().getName());
         assertEquals("method", node.getParent().getParent().getName());

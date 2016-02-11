@@ -9,13 +9,14 @@ import java.io.IOException;
 /**
  * Handle the naming and saving of taken screenshots
  */
-public class ScreenshotDirectory {
+public class LogDirectory {
     private static final String SCREENSHOT_DIR = "test-screenshots";
 
     private final Class<?> testClass;
     private final Node baseDirectory;
+    private int counter = 1;
 
-    public ScreenshotDirectory(Class<?> testClass, World world) {
+    public LogDirectory(Class<?> testClass, World world) {
         this.testClass = testClass;
         try {
             baseDirectory = world.guessProjectHome(Class.forName(testClass.getName())) .join("target", SCREENSHOT_DIR).mkdirsOpt();
@@ -24,22 +25,32 @@ public class ScreenshotDirectory {
         }
     }
 
-    public void save(byte[] screenshot, String suffix, String method) {
+    public void save(byte[] screenshot, String action, String method) {
         try {
-            Node file = methodDirectory(method).join(filename(suffix));
+            Node file = methodDirectory(method).join(filename(action, ".png"));
             file.writeBytes(screenshot);
         } catch (IOException e) {
             throw new RuntimeException("ToDo: Handle this", e);
         }
     }
 
-    private String filename(String suffix) {
+    public void save(String json, String action, String method) {
+        try {
+            Node file = methodDirectory(method).join(filename(action, ".log"));
+            file.writeString(json);
+        } catch (IOException e) {
+            throw new RuntimeException("ToDo: Handle this", e);
+        }
+    }
+
+    private String filename(String suffix, String type) {
         StringBuilder filename = new StringBuilder();
-        filename.append(System.currentTimeMillis());
+        filename.append(counter);
+        counter++;
         if (suffix != null && !suffix.isEmpty()) {
             filename.append("_").append(suffix);
         }
-        filename.append(".png");
+        filename.append(type);
         return filename.toString();
     }
 

@@ -1,6 +1,7 @@
 package com.github.maxbraun.test.joe;
 
 
+import net.oneandone.sushi.fs.World;
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ThreadGuard;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
@@ -40,10 +42,15 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
 
     private void startWebDriver() {
         WebDriver driver = LocalDriverFactory.createDriver(description.getTestClass().getAnnotation(WithBrowser.class));
-        WebDriverEventListener loggingListener = new ScreenshottingWebDriverEventListener(description);
-        EventFiringWebDriver driverWithReporting = new EventFiringWebDriver(driver);
-        driverWithReporting.register(loggingListener);
-        WebDriverRule.driver.set(driverWithReporting);
+        WebDriverEventListener screenshotListener = new ScreenshottingWebDriverEventListener(description,
+                new LogDirectory(description.getTestClass(), new World()));
+        WebDriverEventListener loggingListener = new LoggingWebDriverEventListener(description,
+                new LogDirectory(description.getTestClass(), new World()));
+        EventFiringWebDriver eventFireingDriver = new EventFiringWebDriver(driver);
+        eventFireingDriver.register(screenshotListener);
+        eventFireingDriver.register(loggingListener);
+
+        WebDriverRule.driver.set(ThreadGuard.protect(eventFireingDriver));
     }
 
     private WebDriver webDriver() {
