@@ -21,4 +21,4 @@ Joe takes a screenshot and writes a logfile after operations like clicking or na
 ##Parameterized tests
 Joe can work woith parameterized tests. When Working with these kind of Tests Joe will create seperate logging directories for this.
 ``target/test-screenshots/$test-class/$test-method/$parameters-name`` 
-``$parameters-name`` is without further configuration the index of the test. You can also define another name for this by configuration a name in the ``@Parameters.Parameters (name= {0})`` Annotation. ``{0}``will replace to parameters 1 ``{1}`` to parameter 2 and so on
+``$parameters-name`` is without further configuration the index of the test. You can also define another name for this by configuration a name in the ``@Parameters.Parameters (name="{0}")`` Annotation. ``{0}``will replace to parameters 1 ``{1}`` to parameter 2 and so on
