@@ -1,12 +1,15 @@
 package com.github.maxbraun.test.joe;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.internal.Streams;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.Logs;
-
-import java.util.*;
 
 public class ActionLog {
 
@@ -37,5 +40,18 @@ public class ActionLog {
 
             return actionLog;
         }
+    }
+
+    public String getBrowserDetails() {
+        return browserDetails;
+    }
+    public String getUrl() {
+        return url;
+    }
+    public Collection<Cookie> getCookies() {
+        return cookies;
+    }
+    public Map<String, List<String>> getLogs() {
+        return logs;
     }
 }

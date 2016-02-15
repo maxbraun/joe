@@ -18,8 +18,8 @@ public class MultipleDriverTest {
         Result result = jUnitCore.run(Request.aClass(MultipleDrivers.class).getRunner());
         assertEquals(1, result.getFailureCount());
         Failure failure = result.getFailures().get(0);
-        assertEquals(IllegalStateException.class,failure.getException().getClass());
-        assertEquals("webDriver is not null",failure.getException().getMessage());
+        assertEquals(IllegalStateException.class, failure.getException().getClass());
+        assertEquals("webDriver is not null", failure.getException().getMessage());
     }
 
 
