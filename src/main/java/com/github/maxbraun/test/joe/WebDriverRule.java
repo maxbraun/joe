@@ -50,7 +50,7 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
         eventFireingDriver.register(screenshotListener);
         eventFireingDriver.register(loggingListener);
 
-        WebDriverRule.driver.set(ThreadGuard.protect(eventFireingDriver));
+        WebDriverRule.driver.set(eventFireingDriver);
     }
 
     private WebDriver webDriver() {
