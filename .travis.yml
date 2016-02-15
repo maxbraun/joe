@@ -1,4 +1,6 @@
 language: java
+addons:
+  firefox: latest
 jdk:
   - oraclejdk8
 before_install:
