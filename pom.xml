@@ -2,8 +2,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>net.oneandone.maven.poms</groupId>
-        <artifactId>foss-parent</artifactId>
-        <version>1.5.8</version>
+        <artifactId>lazy-foss-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath />
     </parent>
     <groupId>com.github.maxbraun.test</groupId>
     <artifactId>joe</artifactId>
@@ -17,12 +18,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <oneandone.java.source>1.8</oneandone.java.source>
         <oneandone.java.target>1.8</oneandone.java.target>
-        <jacoco.check.classRatio>0.50</jacoco.check.classRatio>
-        <jacoco.check.instructionRatio>0.50</jacoco.check.instructionRatio>
-        <jacoco.check.methodRatio>0.50</jacoco.check.methodRatio>
-        <jacoco.check.branchRatio>0.50</jacoco.check.branchRatio>
-        <jacoco.check.complexityRatio>0.50</jacoco.check.complexityRatio>
-        <jacoco.check.lineRatio>0.50</jacoco.check.lineRatio>
     </properties>
 
     <scm>
@@ -73,40 +68,6 @@
                         </goals>
                     </execution>
               </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-enforce</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <configuration>
-                    <failOnError>false</failOnError>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <failOnViolation>false</failOnViolation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <strictCheck>false</strictCheck>
-                    <failIfMissing>false</failIfMissing>
-                </configuration>
             </plugin>
         </plugins>
     </build>
