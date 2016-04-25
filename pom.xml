@@ -14,24 +14,18 @@
     <name>joe</name>
     <url>http://github.com/maxbraun/joe</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <oneandone.java.source>1.8</oneandone.java.source>
-        <oneandone.java.target>1.8</oneandone.java.target>
-    </properties>
-
     <scm>
         <connection>scm:git:git://github.com/maxbraun/joe.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/maxbraun/joe.git</developerConnection>
         <url>https://github.com/maxbraun/joe/</url>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
 
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.52.0</version>
+            <version>2.53.0</version>
         </dependency>
 
         <dependency>
