@@ -10,7 +10,7 @@ public class LogDirectoryTest {
 
     @Test
     public void testDirectoryNaming() throws Exception {
-        LogDirectory logDirectory = new LogDirectory(this.getClass(), new World());
+        LogDirectory logDirectory = new LogDirectory(this.getClass(), World.createMinimal());
         Node node = logDirectory.methodDirectory("method[foo|bar]");
         assertEquals("bar", node.getName());
         assertEquals("foo", node.getParent().getName());

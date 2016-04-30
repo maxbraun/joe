@@ -2,6 +2,7 @@ package com.github.maxbraun.test.joe;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
 
 @WithBrowser(Browser.ANY)
 public class StartDriverTest {
@@ -10,7 +11,7 @@ public class StartDriverTest {
 
     @Test
     public void TestFoo() throws Exception {
-        webDriver.get("https://google.com");
+        webDriver.get("https://google.de");
 
     }
 }
