@@ -7,10 +7,10 @@ import java.util.Optional;
 
 
 public class LocalDriverFactory {
-    public static WebDriver createDriver(WithBrowser annotation) {
+    public static WebDriver createDriver(Browser annotation) {
         Optional<? extends WebDriver> webDriver;
 
-        webDriver = new AnnotationWebDriverCreationStrategy(annotation).createWebDriver();
+        webDriver = new SpecificWebDriverCreationStrategy(annotation).createWebDriver();
 
         if (webDriver.isPresent()) {
             return webDriver.get();

@@ -2,6 +2,7 @@ package com.github.maxbraun.test.joe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
