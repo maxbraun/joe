@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ThreadGuard;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
@@ -19,8 +18,17 @@ import java.util.Set;
 
 public class WebDriverRule extends ExternalResource implements WebDriver, JavascriptExecutor {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final World world = World.createMinimal();
     private Description description;
+    private final Browser browser;
+
+    public WebDriverRule() {
+        browser = null;
+    }
+    public WebDriverRule(Browser browser){
+        this.browser = browser;
+    }
 
 
     @Override
@@ -41,16 +49,35 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
     }
 
     private void startWebDriver() {
-        WebDriver driver = LocalDriverFactory.createDriver(description.getTestClass().getAnnotation(WithBrowser.class));
-        WebDriverEventListener screenshotListener = new ScreenshottingWebDriverEventListener(description,
-                new LogDirectory(description.getTestClass(), new World()));
-        WebDriverEventListener loggingListener = new LoggingWebDriverEventListener(description,
-                new LogDirectory(description.getTestClass(), new World()));
-        EventFiringWebDriver eventFireingDriver = new EventFiringWebDriver(driver);
-        eventFireingDriver.register(screenshotListener);
-        eventFireingDriver.register(loggingListener);
+        this.driver.set(attachEventListeners(createWebdriver()));
+    }
 
-        WebDriverRule.driver.set(eventFireingDriver);
+
+    private WebDriver createWebdriver() {
+        Browser localBrowser = browser;
+        WithBrowser withBrowserAnnotation = description.getTestClass().getAnnotation(WithBrowser.class);
+        if (localBrowser == null && withBrowserAnnotation != null) {
+           localBrowser = withBrowserAnnotation.value();
+
+        }
+        return LocalDriverFactory.createDriver(localBrowser);
+    }
+
+    private WebDriver attachEventListeners(WebDriver webDriver) {
+        EventFiringWebDriver eventFireingDriver = new EventFiringWebDriver(webDriver);
+        eventFireingDriver.register(createScreenshotEventListener());
+        eventFireingDriver.register(createLoggingEventListener());
+        return eventFireingDriver;
+    }
+
+    private WebDriverEventListener createScreenshotEventListener() {
+        return new ScreenshottingWebDriverEventListener(description,
+                new LogDirectory(description.getTestClass(), world));
+    }
+
+    private WebDriverEventListener createLoggingEventListener() {
+        return new LoggingWebDriverEventListener(description,
+                new LogDirectory(description.getTestClass(), world));
     }
 
     private WebDriver webDriver() {
