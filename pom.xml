@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.github.maxbraun.test</groupId>
     <artifactId>joe</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>joe</name>
@@ -23,7 +23,7 @@
     <connection>scm:git:git://github.com/maxbraun/joe.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/maxbraun/joe.git</developerConnection>
     <url>https://github.com/maxbraun/joe/</url>
-      <tag>HEAD</tag>
+      <tag>joe-0.2.0</tag>
     </scm>
 
     <dependencies>
