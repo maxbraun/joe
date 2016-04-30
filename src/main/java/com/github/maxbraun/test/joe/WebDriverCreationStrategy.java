@@ -6,5 +6,5 @@ import java.util.Optional;
 
 
 public interface WebDriverCreationStrategy {
-    Optional<? extends WebDriver> createWebDriver();
+    WebDriver createWebDriver();
 }

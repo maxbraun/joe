@@ -56,11 +56,16 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
     private WebDriver createWebdriver() {
         Browser localBrowser = browser;
         WithBrowser withBrowserAnnotation = description.getTestClass().getAnnotation(WithBrowser.class);
-        if (localBrowser == null && withBrowserAnnotation != null) {
-           localBrowser = withBrowserAnnotation.value();
+        WebDriverCreationStrategy creationStrategy;
 
+        if (localBrowser != null && localBrowser != Browser.ANY) {
+            creationStrategy = new SpecificWebDriverCreationStrategy(localBrowser);
+        } else if (withBrowserAnnotation != null && !Browser.ANY.equals(withBrowserAnnotation.value())) {
+            creationStrategy = new SpecificWebDriverCreationStrategy(withBrowserAnnotation.value());
+        } else {
+            creationStrategy = new ProbingWebDriverCreationStrategy();
         }
-        return LocalDriverFactory.createDriver(localBrowser);
+        return creationStrategy.createWebDriver();
     }
 
     private WebDriver attachEventListeners(WebDriver webDriver) {

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class StartDriverParralelTest {
     @Rule
-    public WebDriverRule webDriver = new WebDriverRule(Browser.FIREFOX);
+    public WebDriverRule webDriver = new WebDriverRule();
 
     private World world = World.createMinimal();
 

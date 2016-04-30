@@ -14,12 +14,12 @@ public class SpecificWebDriverCreationStrategy implements WebDriverCreationStrat
     }
 
     @Override
-    public Optional<? extends WebDriver> createWebDriver() {
+    public WebDriver createWebDriver() {
         if (null == browser || null == browser.getClazz()) {
-            return Optional.empty();
+            throw new SeleniumException("Could not start browser. Browser or value was null.");
         }
         try {
-            return Optional.of(browser.getClazz().newInstance());
+            return browser.getClazz().newInstance();
         } catch (Exception e) {
             throw new SeleniumException(e);
         }
