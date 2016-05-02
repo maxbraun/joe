@@ -24,5 +24,5 @@ Joe can work woith parameterized tests. When Working with these kind of Tests Jo
 ``$parameters-name`` is without further configuration the index of the test. You can also define another name for this by configuration a name in the ``@Parameters.Parameters (name="{0}")`` Annotation. ``{0}``will replace to parameters 1 ``{1}`` to parameter 2 and so on
 
 ##defensive dependencies
-Joe knows a lot webdriver implementations. But dependencies don't takes the dependencies into your classpath. 
-If you need a webdriver implementation, add it to your dependency management.
+Joe knows a lot webdriver implementations. But doesn't force all these dependencies into your classpath. 
+You define which webdriver implementation you Need add them to your classpath.
