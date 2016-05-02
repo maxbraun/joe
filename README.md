@@ -10,7 +10,7 @@ He also takes care ab creating a WebDriver. Just use the JUnit Rule Feature.
     <dependency>
         <groupId>com.github.maxbraun.test</groupId>
         <artifactId>joe</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </dependency>
 ```
 
