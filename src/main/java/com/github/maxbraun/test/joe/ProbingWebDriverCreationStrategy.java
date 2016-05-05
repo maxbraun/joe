@@ -1,18 +1,11 @@
 package com.github.maxbraun.test.joe;
 
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.machinepublishers.jbrowserdriver.JBrowserDriver;
-import com.thoughtworks.selenium.SeleniumException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.safari.SafariDriver;
+
+import com.thoughtworks.selenium.SeleniumException;
 
 
 public class ProbingWebDriverCreationStrategy implements WebDriverCreationStrategy {
@@ -21,7 +14,7 @@ public class ProbingWebDriverCreationStrategy implements WebDriverCreationStrate
     @Override
     public WebDriver createWebDriver() {
         for (Browser browser : Browser.values()) {
-            if (null == browser || null == browser.getClazz()) {
+            if (null == browser || null == browser.getClazzUrl()) {
                 continue;
             }
             try {

@@ -1,7 +1,9 @@
 package com.github.maxbraun.test.joe;
 
 
-import net.oneandone.sushi.fs.World;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -12,8 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-import java.util.List;
-import java.util.Set;
+import net.oneandone.sushi.fs.World;
 
 
 public class WebDriverRule extends ExternalResource implements WebDriver, JavascriptExecutor {

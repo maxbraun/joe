@@ -1,9 +1,8 @@
 package com.github.maxbraun.test.joe;
 
-import com.thoughtworks.selenium.SeleniumException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Optional;
+import com.thoughtworks.selenium.SeleniumException;
 
 
 public class SpecificWebDriverCreationStrategy implements WebDriverCreationStrategy {
@@ -15,11 +14,13 @@ public class SpecificWebDriverCreationStrategy implements WebDriverCreationStrat
 
     @Override
     public WebDriver createWebDriver() {
-        if (null == browser || null == browser.getClazz()) {
+        if (null == browser || null == browser.getClazzUrl()) {
             throw new SeleniumException("Could not start browser. Browser or value was null.");
         }
         try {
             return browser.getClazz().newInstance();
+        } catch (ClassNotFoundException e){
+            throw new SeleniumException(browser + " is not in your classpath. To fix this problem, add the driver to your dependency management", e);
         } catch (Exception e) {
             throw new SeleniumException(e);
         }
