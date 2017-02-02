@@ -42,6 +42,11 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
         screenshotsEnabled = true;
     }
 
+    public WebDriverRule(Browser browser, boolean loggingEnabled, boolean screenshotsEnabled) {
+        this.loggingEnabled = loggingEnabled;
+        this.screenshotsEnabled = screenshotsEnabled;
+        this.browser = browser;
+    }
 
     @Override
     public Statement apply(Statement base, Description description) {
