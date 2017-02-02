@@ -19,6 +19,8 @@ import net.oneandone.sushi.fs.World;
 
 public class WebDriverRule extends ExternalResource implements WebDriver, JavascriptExecutor {
 
+    private final boolean loggingEnabled;
+    private final boolean screenshotsEnabled;
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final World world = World.createMinimal();
     private Description description;
@@ -26,9 +28,18 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
 
     public WebDriverRule() {
         browser = null;
+        loggingEnabled = true;
+        screenshotsEnabled = true;
+    }
+    public WebDriverRule(boolean loggingEnabled, boolean screenshotsEnabled) {
+        this.loggingEnabled = loggingEnabled;
+        this.screenshotsEnabled = screenshotsEnabled;
+        browser = null;
     }
     public WebDriverRule(Browser browser){
         this.browser = browser;
+        loggingEnabled = true;
+        screenshotsEnabled = true;
     }
 
 
@@ -71,8 +82,12 @@ public class WebDriverRule extends ExternalResource implements WebDriver, Javasc
 
     private WebDriver attachEventListeners(WebDriver webDriver) {
         EventFiringWebDriver eventFireingDriver = new EventFiringWebDriver(webDriver);
-        eventFireingDriver.register(createScreenshotEventListener());
-        eventFireingDriver.register(createLoggingEventListener());
+        if (screenshotsEnabled) {
+            eventFireingDriver.register(createScreenshotEventListener());
+        }
+        if (loggingEnabled) {
+            eventFireingDriver.register(createLoggingEventListener());
+        }
         return eventFireingDriver;
     }
 
