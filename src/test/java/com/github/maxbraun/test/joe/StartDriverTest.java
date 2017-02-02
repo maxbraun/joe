@@ -2,7 +2,6 @@ package com.github.maxbraun.test.joe;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runners.Parameterized;
 
 @WithBrowser(Browser.ANY)
 public class StartDriverTest {

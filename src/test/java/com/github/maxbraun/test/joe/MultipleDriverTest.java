@@ -9,7 +9,7 @@ public class MultipleDriverTest {
     @Rule
     public WebDriverRule webDriver1 = new WebDriverRule();
     @Rule
-    public WebDriverRule webDriver2 = new WebDriverRule(Browser.FIREFOX);
+    public WebDriverRule webDriver2 = new WebDriverRule(Browser.JBROWSER);
 
     @Test
     public void test() throws Exception {

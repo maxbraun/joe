@@ -15,8 +15,8 @@
     <url>http://github.com/maxbraun/joe</url>
 
     <properties>
-        <selenium.version>2.53.0</selenium.version>
-        <htmlunit.version>2.20</htmlunit.version>
+        <selenium.version>3.0.0</selenium.version>
+        <htmlunit.version>2.23.1</htmlunit.version>
     </properties>
 
     <scm>
