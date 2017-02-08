@@ -5,13 +5,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.Logs;
 
 public class ActionLog {
+    private static final Logger LOGGER = Logger.getLogger("Joe");
 
     private String browserDetails;
     private String url;
@@ -38,6 +42,13 @@ public class ActionLog {
             }
 
 
+            return actionLog;
+        }
+
+        public static ActionLog fail(UnsupportedCommandException e) {
+            LOGGER.log(Level.WARNING, "action log not supported. falling back", e);
+            ActionLog actionLog = new ActionLog();
+            actionLog.browserDetails = "not supported" +  e.getMessage();
             return actionLog;
         }
     }

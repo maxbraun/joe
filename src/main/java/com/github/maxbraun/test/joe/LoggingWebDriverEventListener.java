@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.junit.runner.Description;
+import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
@@ -42,7 +43,12 @@ public class LoggingWebDriverEventListener extends AbstractWebDriverEventListene
             EventFiringWebDriver eventFiringWebDriver = (EventFiringWebDriver) driver;
             driver = eventFiringWebDriver.getWrappedDriver();
         }
-        ActionLog actionLog = new ActionLog.Builder().build(driver);
+        ActionLog actionLog;
+        try {
+            actionLog = new ActionLog.Builder().build(driver);
+        } catch (UnsupportedCommandException e) {
+            actionLog = ActionLog.Builder.fail(e);
+        }
         logDirectory.save(gson.toJson(actionLog), action, description.getMethodName());
     }
 

@@ -12,6 +12,11 @@ public enum Browser {
     IEXPLORE("org.openqa.selenium.ie.InternetExplorerDriver"),
     CHROME("org.openqa.selenium.chrome.ChromeDriver"),
     HTMLUNIT("org.openqa.selenium.htmlunit.HtmlUnitDriver"),
+    /**
+     * PhantomJs Webdriver implemetation is far behind selenium 3
+     * https://github.com/detro/ghostdriver/commit/f976007a431e634a3ca981eea743a2686ebed38e
+     */
+    @Deprecated
     PHANTOMJS("org.openqa.selenium.phantomjs.PhantomJSDriver"),
     JBROWSER("com.machinepublishers.jbrowserdriver.JBrowserDriver");
 
@@ -22,7 +27,7 @@ public enum Browser {
     }
 
     public Class<? extends WebDriver> getClazz() throws ClassNotFoundException {
-        return (Class<? extends WebDriver>)this.getClass().getClassLoader().loadClass(clazz);
+        return (Class<? extends WebDriver>) this.getClass().getClassLoader().loadClass(clazz);
     }
     public String getClazzUrl() {
         return clazz;

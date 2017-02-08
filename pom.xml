@@ -8,15 +8,15 @@
     </parent>
     <groupId>com.github.maxbraun.test</groupId>
     <artifactId>joe</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>joe</name>
     <url>http://github.com/maxbraun/joe</url>
 
     <properties>
-        <selenium.version>2.53.0</selenium.version>
-        <htmlunit.version>2.20</htmlunit.version>
+        <selenium.version>3.0.0</selenium.version>
+        <htmlunit.version>2.23.1</htmlunit.version>
     </properties>
 
     <scm>
@@ -106,6 +106,23 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.22</version>
         </dependency>
     </dependencies>
 

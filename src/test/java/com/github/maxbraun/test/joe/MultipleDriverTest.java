@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 public class MultipleDriverTest {
 
     @Rule
-    public WebDriverRule webDriver1 = new WebDriverRule();
+    public WebDriverRule webDriver1 = new WebDriverRule(false, true);
     @Rule
-    public WebDriverRule webDriver2 = new WebDriverRule(Browser.FIREFOX);
+    public WebDriverRule webDriver2 = new WebDriverRule();
 
     @Test
     public void test() throws Exception {
