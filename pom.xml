@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.github.maxbraun.test</groupId>
     <artifactId>joe</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>joe</name>
