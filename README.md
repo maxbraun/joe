@@ -10,9 +10,11 @@ He also takes care ab creating a WebDriver. Just use the JUnit Rule Feature.
     <dependency>
         <groupId>com.github.maxbraun.test</groupId>
         <artifactId>joe</artifactId>
-        <version>0.2.0</version>
+        <version>1.0.0</version>
     </dependency>
 ```
+## Selenium 3
+Uses latest Selenium major version 3. If you need selenium 2.x use joe in 0.2.x.
 
 ##Logging and Screenshots
 While you wrote tests you you took screenhots all the time? Joe takes care about this.
